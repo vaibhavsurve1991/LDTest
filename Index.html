@@ -10,6 +10,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <!--<link href="style.css" rel="stylesheet" />-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" href="./style.css">
@@ -47,6 +50,7 @@
                 $(".tablnkbuttonSecond").css("color", "#dc6565");
             }
         }
+
         $(document).ready(function () {
             $("#Self").css("display", "block");
             $("#Spouse").css("display", "none");
@@ -56,6 +60,9 @@
 
             $(".tablnkSecond").css("border-bottom", "2px solid #e6e1e1");
             $(".tablnkbuttonSecond").css("color", "#867c7c");
+
+            $('#btnContinue').attr('disabled', 'disabled');
+            $("#btnContinue").css("style", "visibility:hidden");
         });
 
         function IsnumericMobile(co, e) {
@@ -95,9 +102,62 @@
             }
         }
 
+        function CheckValid(e) {
+            debugger;
+            var item = $("#" + e.id + "");
+            if (item.val() != "") {
+                item.css("border", "1px solid #e6e1e1");
+            }
+            else {
+                item.css("border", "1px solid red");
+                alert(item.attr("data-error"));
+                //document.getElementById("#" + e.id + "").setCustomValidity("This email is already used");
+            }
+            btnContinueValidator();
+        }
+
+        function CheckValid1(e) {
+            debugger;
+            var item = $("#" + e.id + "");
+            if (item.val() != "") {
+                item.css("border", "1px solid #e6e1e1");
+            }
+            else {
+                item.css("border", "1px solid red");
+                alert(item.attr("data-error"));
+                //document.getElementById("#" + e.id + "").setCustomValidity("This email is already used");
+            }
+            btnContinueValidator();
+        }
+
+        function CheckValidSelect(e) {
+            debugger;
+            var itemid = $("#" + e.id + "");
+            var item = $("#" + e.id + " option:selected");
+            if (item.val() != "0") {
+                itemid.css("border", "1px solid #e6e1e1");
+            }
+            else {
+                itemid.css("border", "1px solid red");
+            }
+            btnContinueValidator();
+        }
+
+        function btnContinueValidator() {
+            if (ValidateNew()) {
+                openTab("Spouse");
+                $('#btnContinue').removeAttr('disabled');
+                $("#btnContinue").css("style", "visibility:visible");
+            }
+            else {
+                $('#btnContinue').attr('disabled', 'disabled');
+                $("#btnContinue").css("style", "visibility:hidden");
+            }
+        }
+
         $(document).ready(function () {
             $("#btnContinue").click(function () {
-                if (Validate()) {
+                if (ValidateNew()) {
                     openTab("Spouse");
                     ProgressPercent("30%");
                 }
@@ -107,7 +167,7 @@
             })
         });
 
-        function Validate() {
+        function Validate1() {
             //debugger;
             var isValid = true;
 
@@ -257,6 +317,86 @@
             return isValid;
         }
 
+        function ValidateNew() {
+            //debugger;
+            var isValid = true;
+
+            if ($("#txtFirstName").val() != "") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#txtLastName").val() != "") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#txtDOB").val() != "") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#txtWeight").val() != "") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#txtNomineeName").val() != "") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#txtNomineeDOB").val() != "") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#txtMobile").val() != "") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#ddlOccupation option:selected").val() != "0") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#ddlfeet option:selected").val() != "0") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#ddlInch option:selected").val() != "0") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($("#ddlRelation option:selected").val() != "0") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            if ($('input[name="gender"]:checked').val() == "Single" || $('input[name="gender"]:checked').val() == "Married") {
+                isValid = true;
+            } else {
+                isValid = false;
+                return
+            }
+            //isValid = true;
+            return isValid;
+        }
+
         function ProgressPercent(size) {
             var s = size;
             //debugger;
@@ -356,7 +496,7 @@
                                 </div>
                                 <div class="col-md-5 MiddleDivSecondTile">
                                     <div class="ddlselectDiv">
-                                        <select name="Select" id="ddlSelect">
+                                        <select name="Select" onchange="CheckValidSelect(this);" id="ddlSelect">
                                             <option value="0" selected="selected">Self</option>
                                             <option value="1">Self1</option>
                                             <option value="2">Self2</option>
@@ -392,14 +532,16 @@
                                                 <label class="lblCSS">
                                                     First Name
                                                 </label>
-                                                <input id="txtFirstName" class="txtCSS" type="text" placeholder="Enter First Name" />
+                                                    <input id="txtFirstName" class="txtCSS" type="text" onfocus="CheckValid(this);" onkeyup="CheckValid(this);" placeholder="Enter First Name"
+                                                           data-error="First Name must not be empty." />
                                                 <span id="spanFirstName" class="spanValidateRemove">*</span>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="lblCSS">
                                                     Last Name
                                                 </label>
-                                                <input id="txtLastName" class="txtCSS" type="text" placeholder="Enter Last Name" />
+                                                <input id="txtLastName" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);"type="text" placeholder="Enter Last Name"
+                                                       data-error="Last Name must not be empty." />
                                                 <span id="spanLastName" class="spanValidateRemove">*</span>
                                             </div>
                                         </div>
@@ -408,14 +550,15 @@
                                                 <label class="lblCSS">
                                                     Your Date Of Birth
                                                 </label>
-                                                <input id="txtDOB" class="txtCSS" type="text" placeholder="DD/MM/YYYY" />
+                                                <input id="txtDOB" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);" type="text" placeholder="DD/MM/YYYY"
+                                                       data-error="Your Date Of BIRTH must not be empty." />
                                                 <span id="spanDOB" class="spanValidateRemove">*</span>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="lblCSS">
                                                     Occupation
                                                 </label>
-                                                <select name="Select" class="txtCSS" id="ddlOccupation">
+                                                <select name="Select" onchange="CheckValidSelect(this);" class="txtCSS" id="ddlOccupation">
                                                     <option value="0" selected="selected">Please Select Occupation</option>
                                                     <option value="1">Occupation1</option>
                                                     <option value="2">Occupation2</option>
@@ -430,13 +573,13 @@
                                                     Height
                                                 </label>
                                                 <div style="width:96%">
-                                                    <select name="Select" style="width:45%" class="txtCSS" id="ddlfeet">
+                                                    <select name="Select"onchange="CheckValidSelect(this);" style="width:45%" class="txtCSS" id="ddlfeet">
                                                         <option value="0" selected="selected">Please Feet</option>
                                                         <option value="1">5</option>
                                                         <option value="2">6</option>
                                                         <option value="3">7</option>
                                                     </select>
-                                                    <select name="Select" style="width:45%" class="txtCSS" id="ddlInch">
+                                                    <select name="Select" onchange="CheckValidSelect(this);" style="width:45%" class="txtCSS" id="ddlInch">
                                                         <option value="0" selected="selected">Please Inch</option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -449,7 +592,8 @@
                                                 <label class="lblCSS">
                                                     Weight
                                                 </label>
-                                                <input id="txtWeight" class="txtCSS" onkeypress="IsnumericWeight(this,event)" type="text" placeholder="In kg" />
+                                                <input id="txtWeight" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);" onkeypress="IsnumericWeight(this,event)" type="text" placeholder="In kg"
+                                                       data-error="Weight must not be empty." />
                                                 <span id="spanWeight" class="spanValidateRemove">*</span>
                                             </div>
                                         </div>
@@ -479,14 +623,15 @@
                                                 <label class="lblCSS">
                                                     Nominees's Full Name
                                                 </label>
-                                                <input id="txtNomineeName" class="txtCSS" type="text" placeholder="Enter Nominees's Full Name" />
+                                                <input id="txtNomineeName" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);" type="text" placeholder="Enter Nominees's Full Name"
+                                                       data-error="Nominee must not be empty." />
                                                 <span id="spanNomineeName" class="spanValidateRemove">*</span>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="lblCSS">
                                                     Relation with Nominee
                                                 </label>
-                                                <select name="Select" class="txtCSS" id="ddlRelation">
+                                                <select name="Select"onchange="CheckValidSelect(this);" class="txtCSS" id="ddlRelation">
                                                     <option value="0" selected="selected">Please Select</option>
                                                     <option value="1">Mother</option>
                                                     <option value="2">Father</option>
@@ -499,14 +644,16 @@
                                                 <label class="lblCSS">
                                                     Nominees's Date Of Birth
                                                 </label>
-                                                <input id="txtNomineeDOB" class="txtCSS" type="text" placeholder="DD/MM/YYYY" />
+                                                <input id="txtNomineeDOB" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);" type="text" placeholder="DD/MM/YYYY"
+                                                       data-error="Nominee DOB must not be empty." />
                                                 <span id="spanNomineeDOB" class="spanValidateRemove">*</span>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="lblCSS">
                                                     Mobile No. Of Nominees's
                                                 </label>
-                                                <input id="txtMobile" class="txtCSS" onkeydown="IsnumericMobile(this,event)" style="margin-bottom:5%;" type="text" placeholder="Enter Your Mobile Number" />
+                                                <input id="txtMobile" class="txtCSS" onfocus="CheckValid(this);" onkeydown="IsnumericMobile(this,event)" onchange="CheckValid(this);" style="margin-bottom:5%;" type="text" placeholder="Enter Your Mobile Number"
+                                                       data-error="Mobile Number must not be empty." />
                                                 <span id="spantxtMobile" class="spanValidateRemove">*</span>
                                             </div>
                                         </div>
