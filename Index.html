@@ -67,10 +67,27 @@
 
         function IsnumericMobile(co, e) {
             //debugger;
-            var con = co.value;
+            //var con = co.value;
+            //var leng = co.value.length;
+            //var num = e.keyCode;
+            //if (num > 47 && num < 58 || num == 32 || num == 8) {
+            //    if (leng < 10 || num == 8) {
+            //        true;
+            //    }
+            //    else {
+            //        e.preventDefault();
+            //    }
+            //}
+            //else {
+            //    e.preventDefault();
+            //}
+                        //var con = co.value;
             var leng = co.value.length;
             var num = e.keyCode;
-            if (num > 47 && num < 58 || num == 32 || num == 8) {
+            if (num > 58 && num < 126 ) {
+                e.preventDefault();
+            }
+            else {                
                 if (leng < 10 || num == 8) {
                     true;
                 }
@@ -78,16 +95,17 @@
                     e.preventDefault();
                 }
             }
-            else {
-                e.preventDefault();
-            }
         }
         function IsnumericWeight(co, e) {
             //debugger;
             var con = co.value + '' + e.key;
             var leng = co.value.length;
             var num = e.keyCode;
-            if (num > 47 && num < 58 || num == 8) {//&& leng<3
+            if (num > 58 && num < 126) {//&& leng<3
+                e.preventDefault();
+            }
+            else {
+                
                 if (con != "") {
                     var t = parseInt(con);
                     debugger;
@@ -97,9 +115,22 @@
                     }
                 }
             }
-            else {
-                e.preventDefault();
-            }
+            //var con = co.value + '' + e.key;
+            //var leng = co.value.length;
+            //var num = e.keyCode;
+            //if (num > 47 && num < 58 || num == 8) {//&& leng<3
+            //    if (con != "") {
+            //        var t = parseInt(con);
+            //        debugger;
+            //        if (t > 200) {
+            //            alert("Weight Between 1 to 200");
+            //            e.preventDefault();
+            //        }
+            //    }
+            //}
+            //else {
+            //    e.preventDefault();
+            //}
         }
 
         function CheckValid(e) {
@@ -124,7 +155,7 @@
             }
             else {
                 item.css("border", "1px solid red");
-                alert(item.attr("data-error"));
+                //alert(item.attr("data-error"));
                 //document.getElementById("#" + e.id + "").setCustomValidity("This email is already used");
             }
             btnContinueValidator();
@@ -139,6 +170,20 @@
             }
             else {
                 itemid.css("border", "1px solid red");
+            }
+            btnContinueValidator();
+        }
+
+        function CheckValidSelect1(e) {
+            debugger;
+            var itemid = $("#" + e.id + "");
+            var item = $("#" + e.id + " option:selected");
+            if (item.val() != "0") {
+                itemid.css("border", "1px solid #e6e1e1");
+            }
+            else {
+                itemid.css("border", "1px solid red");
+                alert(itemid.attr("data-error"));
             }
             btnContinueValidator();
         }
@@ -167,155 +212,155 @@
             })
         });
 
-        function Validate1() {
-            //debugger;
-            var isValid = true;
+        //function Validate1() {
+        //    //debugger;
+        //    var isValid = true;
 
-            if ($("#txtFirstName").val() != "") {
-                isValid = true;
-                $("#txtFirstName").css("border", "1px solid #e6e1e1");
-                $("#spanFirstName").removeClass('spanValidateApply');
-                $("#spanFirstName").addClass('spanValidateRemove');
-            } else {
-                $("#txtFirstName").css("border", "1px solid red");
-                $("#spanFirstName").removeClass('spanValidateRemove');
-                $("#spanFirstName").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#txtFirstName").val() != "") {
+        //        isValid = true;
+        //        $("#txtFirstName").css("border", "1px solid #e6e1e1");
+        //        $("#spanFirstName").removeClass('spanValidateApply');
+        //        $("#spanFirstName").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#txtFirstName").css("border", "1px solid red");
+        //        $("#spanFirstName").removeClass('spanValidateRemove');
+        //        $("#spanFirstName").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#txtLastName").val() != "") {
-                isValid = true;
-                $("#txtLastName").css("border", "1px solid #e6e1e1");
-                $("#spanLastName").removeClass('spanValidateApply');
-                $("#spanLastName").addClass('spanValidateRemove');
-            } else {
-                $("#txtLastName").css("border", "1px solid red");
-                $("#spanLastName").removeClass('spanValidateRemove');
-                $("#spanLastName").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#txtLastName").val() != "") {
+        //        isValid = true;
+        //        $("#txtLastName").css("border", "1px solid #e6e1e1");
+        //        $("#spanLastName").removeClass('spanValidateApply');
+        //        $("#spanLastName").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#txtLastName").css("border", "1px solid red");
+        //        $("#spanLastName").removeClass('spanValidateRemove');
+        //        $("#spanLastName").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#txtDOB").val() != "") {
-                isValid = true;
-                $("#txtDOB").css("border", "1px solid #e6e1e1");
-                $("#spanDOB").removeClass('spanValidateApply');
-                $("#spanDOB").addClass('spanValidateRemove');
-            } else {
-                $("#txtDOB").css("border", "1px solid red");
-                $("#spanDOB").removeClass('spanValidateRemove');
-                $("#spanDOB").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#txtDOB").val() != "") {
+        //        isValid = true;
+        //        $("#txtDOB").css("border", "1px solid #e6e1e1");
+        //        $("#spanDOB").removeClass('spanValidateApply');
+        //        $("#spanDOB").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#txtDOB").css("border", "1px solid red");
+        //        $("#spanDOB").removeClass('spanValidateRemove');
+        //        $("#spanDOB").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#txtWeight").val() != "") {
-                isValid = true;
-                $("#txtWeight").css("border", "1px solid #e6e1e1");
-                $("#spanWeight").removeClass('spanValidateApply');
-                $("#spanWeight").addClass('spanValidateRemove');
-            } else {
-                $("#txtWeight").css("border", "1px solid red");
-                $("#spanWeight").removeClass('spanValidateRemove');
-                $("#spanWeight").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#txtWeight").val() != "") {
+        //        isValid = true;
+        //        $("#txtWeight").css("border", "1px solid #e6e1e1");
+        //        $("#spanWeight").removeClass('spanValidateApply');
+        //        $("#spanWeight").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#txtWeight").css("border", "1px solid red");
+        //        $("#spanWeight").removeClass('spanValidateRemove');
+        //        $("#spanWeight").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#txtNomineeName").val() != "") {
-                isValid = true;
-                $("#txtNomineeName").css("border", "1px solid #e6e1e1");
-                $("#spanNomineeName").removeClass('spanValidateApply');
-                $("#spanNomineeName").addClass('spanValidateRemove');
-            } else {
-                $("#txtNomineeName").css("border", "1px solid red");
-                $("#spanNomineeName").removeClass('spanValidateRemove');
-                $("#spanNomineeName").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#txtNomineeName").val() != "") {
+        //        isValid = true;
+        //        $("#txtNomineeName").css("border", "1px solid #e6e1e1");
+        //        $("#spanNomineeName").removeClass('spanValidateApply');
+        //        $("#spanNomineeName").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#txtNomineeName").css("border", "1px solid red");
+        //        $("#spanNomineeName").removeClass('spanValidateRemove');
+        //        $("#spanNomineeName").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#txtNomineeDOB").val() != "") {
-                isValid = true;
-                $("#txtNomineeDOB").css("border", "1px solid #e6e1e1");
-                $("#spanNomineeDOB").removeClass('spanValidateApply');
-                $("#spanNomineeDOB").addClass('spanValidateRemove');
-            } else {
-                $("#txtNomineeDOB").css("border", "1px solid red");
-                $("#spanNomineeDOB").removeClass('spanValidateRemove');
-                $("#spanNomineeDOB").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#txtNomineeDOB").val() != "") {
+        //        isValid = true;
+        //        $("#txtNomineeDOB").css("border", "1px solid #e6e1e1");
+        //        $("#spanNomineeDOB").removeClass('spanValidateApply');
+        //        $("#spanNomineeDOB").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#txtNomineeDOB").css("border", "1px solid red");
+        //        $("#spanNomineeDOB").removeClass('spanValidateRemove');
+        //        $("#spanNomineeDOB").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#txtMobile").val() != "") {
-                isValid = true;
-                $("#txtMobile").css("border", "1px solid #e6e1e1");
-                $("#spanMobile").removeClass('spanValidateApply');
-                $("#spanMobile").addClass('spanValidateRemove');
-            } else {
-                $("#txtMobile").css("border", "1px solid red");
-                $("#spanMobile").removeClass('spanValidateRemove');
-                $("#spanMobile").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#txtMobile").val() != "") {
+        //        isValid = true;
+        //        $("#txtMobile").css("border", "1px solid #e6e1e1");
+        //        $("#spanMobile").removeClass('spanValidateApply');
+        //        $("#spanMobile").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#txtMobile").css("border", "1px solid red");
+        //        $("#spanMobile").removeClass('spanValidateRemove');
+        //        $("#spanMobile").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#ddlOccupation option:selected").val() != "0") {
-                isValid = true;
-                $("#ddlOccupation").css("border", "1px solid #e6e1e1");
-                $("#spanOccupation").removeClass('spanValidateApply');
-                $("#spanOccupation").addClass('spanValidateRemove');
-            } else {
-                $("#ddlOccupation").css("border", "1px solid red");
-                $("#spanOccupation").removeClass('spanValidateRemove');
-                $("#spanOccupation").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#ddlOccupation option:selected").val() != "0") {
+        //        isValid = true;
+        //        $("#ddlOccupation").css("border", "1px solid #e6e1e1");
+        //        $("#spanOccupation").removeClass('spanValidateApply');
+        //        $("#spanOccupation").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#ddlOccupation").css("border", "1px solid red");
+        //        $("#spanOccupation").removeClass('spanValidateRemove');
+        //        $("#spanOccupation").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#ddlfeet option:selected").val() != "0") {
-                isValid = true;
-                $("#ddlfeet").css("border", "1px solid #e6e1e1");
-                $("#spanHeight").removeClass('spanValidateApply');
-                $("#spanHeight").addClass('spanValidateRemove');
-            } else {
-                $("#ddlfeet").css("border", "1px solid red");
-                $("#spanHeight").removeClass('spanValidateRemove');
-                $("#spanHeight").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#ddlfeet option:selected").val() != "0") {
+        //        isValid = true;
+        //        $("#ddlfeet").css("border", "1px solid #e6e1e1");
+        //        $("#spanHeight").removeClass('spanValidateApply');
+        //        $("#spanHeight").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#ddlfeet").css("border", "1px solid red");
+        //        $("#spanHeight").removeClass('spanValidateRemove');
+        //        $("#spanHeight").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#ddlInch option:selected").val() != "0") {
-                isValid = true;
-                $("#ddlInch").css("border", "1px solid #e6e1e1");
-                $("#spanHeight").removeClass('spanValidateApply');
-                $("#spanHeight").addClass('spanValidateRemove');
-            } else {
-                $("#ddlInch").css("border", "1px solid red");
-                $("#spanHeight").removeClass('spanValidateRemove');
-                $("#spanHeight").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#ddlInch option:selected").val() != "0") {
+        //        isValid = true;
+        //        $("#ddlInch").css("border", "1px solid #e6e1e1");
+        //        $("#spanHeight").removeClass('spanValidateApply');
+        //        $("#spanHeight").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#ddlInch").css("border", "1px solid red");
+        //        $("#spanHeight").removeClass('spanValidateRemove');
+        //        $("#spanHeight").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($("#ddlRelation option:selected").val() != "0") {
-                isValid = true;
-                $("#ddlRelation").css("border", "1px solid #e6e1e1");
-                $("#spanRelationWithNominee").removeClass('spanValidateApply');
-                $("#spanRelationWithNominee").addClass('spanValidateRemove');
-            } else {
-                $("#ddlRelation").css("border", "1px solid red");
-                $("#spanRelationWithNominee").removeClass('spanValidateRemove');
-                $("#spanRelationWithNominee").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($("#ddlRelation option:selected").val() != "0") {
+        //        isValid = true;
+        //        $("#ddlRelation").css("border", "1px solid #e6e1e1");
+        //        $("#spanRelationWithNominee").removeClass('spanValidateApply');
+        //        $("#spanRelationWithNominee").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#ddlRelation").css("border", "1px solid red");
+        //        $("#spanRelationWithNominee").removeClass('spanValidateRemove');
+        //        $("#spanRelationWithNominee").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            if ($('input[name="gender"]:checked').val() == "Single" || $('input[name="gender"]:checked').val() == "Married") {
-                isValid = true;
-                $("#spanMaritialStatus").removeClass('spanValidateApply');
-                $("#spanMaritialStatus").addClass('spanValidateRemove');
-            } else {
-                $("#spanMaritialStatus").removeClass('spanValidateRemove');
-                $("#spanMaritialStatus").addClass('spanValidateApply');
-                isValid = false;
-            }
+        //    if ($('input[name="gender"]:checked').val() == "Single" || $('input[name="gender"]:checked').val() == "Married") {
+        //        isValid = true;
+        //        $("#spanMaritialStatus").removeClass('spanValidateApply');
+        //        $("#spanMaritialStatus").addClass('spanValidateRemove');
+        //    } else {
+        //        $("#spanMaritialStatus").removeClass('spanValidateRemove');
+        //        $("#spanMaritialStatus").addClass('spanValidateApply');
+        //        isValid = false;
+        //    }
 
-            //isValid = true;
-            return isValid;
-        }
+        //    //isValid = true;
+        //    return isValid;
+        //}
 
         function ValidateNew() {
             //debugger;
@@ -532,7 +577,7 @@
                                                 <label class="lblCSS">
                                                     First Name
                                                 </label>
-                                                    <input id="txtFirstName" class="txtCSS" type="text" onfocus="CheckValid(this);" onkeyup="CheckValid(this);" placeholder="Enter First Name"
+                                                    <input id="txtFirstName" class="txtCSS" type="text" onfocus="CheckValid1(this);" onfocusout="CheckValid(this);" placeholder="Enter First Name"
                                                            data-error="First Name must not be empty." />
                                                 <span id="spanFirstName" class="spanValidateRemove">*</span>
                                             </div>
@@ -540,7 +585,7 @@
                                                 <label class="lblCSS">
                                                     Last Name
                                                 </label>
-                                                <input id="txtLastName" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);"type="text" placeholder="Enter Last Name"
+                                                <input id="txtLastName" class="txtCSS" onfocus="CheckValid1(this);" onfocusout="CheckValid(this);"type="text" placeholder="Enter Last Name"
                                                        data-error="Last Name must not be empty." />
                                                 <span id="spanLastName" class="spanValidateRemove">*</span>
                                             </div>
@@ -550,7 +595,7 @@
                                                 <label class="lblCSS">
                                                     Your Date Of Birth
                                                 </label>
-                                                <input id="txtDOB" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);" type="text" placeholder="DD/MM/YYYY"
+                                                <input id="txtDOB" class="txtCSS" onfocus="CheckValid1(this);" onfocusout="CheckValid(this);" type="text" placeholder="DD/MM/YYYY"
                                                        data-error="Your Date Of BIRTH must not be empty." />
                                                 <span id="spanDOB" class="spanValidateRemove">*</span>
                                             </div>
@@ -558,7 +603,8 @@
                                                 <label class="lblCSS">
                                                     Occupation
                                                 </label>
-                                                <select name="Select" onchange="CheckValidSelect(this);" class="txtCSS" id="ddlOccupation">
+                                                <select name="Select" onchange="CheckValidSelect(this);" onfocusout="CheckValidSelect1(this);" class="txtCSS" id="ddlOccupation"
+                                                        data-error="Please select occupation." >
                                                     <option value="0" selected="selected">Please Select Occupation</option>
                                                     <option value="1">Occupation1</option>
                                                     <option value="2">Occupation2</option>
@@ -573,13 +619,13 @@
                                                     Height
                                                 </label>
                                                 <div style="width:96%">
-                                                    <select name="Select"onchange="CheckValidSelect(this);" style="width:45%" class="txtCSS" id="ddlfeet">
+                                                    <select name="Select"onchange="CheckValidSelect(this);" onfocusout="CheckValidSelect1(this);" data-error="Please select Feet."  style="width:45%" class="txtCSS" id="ddlfeet">
                                                         <option value="0" selected="selected">Please Feet</option>
                                                         <option value="1">5</option>
                                                         <option value="2">6</option>
                                                         <option value="3">7</option>
                                                     </select>
-                                                    <select name="Select" onchange="CheckValidSelect(this);" style="width:45%" class="txtCSS" id="ddlInch">
+                                                    <select name="Select" onchange="CheckValidSelect(this);" onfocusout="CheckValidSelect1(this);" data-error="Please select Inch."  style="width:45%" class="txtCSS" id="ddlInch">
                                                         <option value="0" selected="selected">Please Inch</option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -592,7 +638,7 @@
                                                 <label class="lblCSS">
                                                     Weight
                                                 </label>
-                                                <input id="txtWeight" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);" onkeypress="IsnumericWeight(this,event)" type="text" placeholder="In kg"
+                                                <input id="txtWeight" class="txtCSS" onfocus="CheckValid1(this);" onfocusout="CheckValid(this);" onkeypress="IsnumericWeight(this,event)" type="text" placeholder="In kg"
                                                        data-error="Weight must not be empty." />
                                                 <span id="spanWeight" class="spanValidateRemove">*</span>
                                             </div>
@@ -623,7 +669,7 @@
                                                 <label class="lblCSS">
                                                     Nominees's Full Name
                                                 </label>
-                                                <input id="txtNomineeName" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);" type="text" placeholder="Enter Nominees's Full Name"
+                                                <input id="txtNomineeName" class="txtCSS" onfocus="CheckValid1(this);" onfocusout="CheckValid(this);" type="text" placeholder="Enter Nominees's Full Name"
                                                        data-error="Nominee must not be empty." />
                                                 <span id="spanNomineeName" class="spanValidateRemove">*</span>
                                             </div>
@@ -631,7 +677,7 @@
                                                 <label class="lblCSS">
                                                     Relation with Nominee
                                                 </label>
-                                                <select name="Select"onchange="CheckValidSelect(this);" class="txtCSS" id="ddlRelation">
+                                                <select name="Select"onchange="CheckValidSelect(this);" onfocusout="CheckValidSelect1(this);" data-error="Please select Nominee Relation."  class="txtCSS" id="ddlRelation">
                                                     <option value="0" selected="selected">Please Select</option>
                                                     <option value="1">Mother</option>
                                                     <option value="2">Father</option>
@@ -644,7 +690,7 @@
                                                 <label class="lblCSS">
                                                     Nominees's Date Of Birth
                                                 </label>
-                                                <input id="txtNomineeDOB" class="txtCSS" onfocus="CheckValid(this);" onchange="CheckValid(this);" type="text" placeholder="DD/MM/YYYY"
+                                                <input id="txtNomineeDOB" class="txtCSS" onfocus="CheckValid1(this);" onfocusout="CheckValid(this);" type="text" placeholder="DD/MM/YYYY"
                                                        data-error="Nominee DOB must not be empty." />
                                                 <span id="spanNomineeDOB" class="spanValidateRemove">*</span>
                                             </div>
@@ -652,7 +698,7 @@
                                                 <label class="lblCSS">
                                                     Mobile No. Of Nominees's
                                                 </label>
-                                                <input id="txtMobile" class="txtCSS" onfocus="CheckValid(this);" onkeydown="IsnumericMobile(this,event)" onchange="CheckValid(this);" style="margin-bottom:5%;" type="text" placeholder="Enter Your Mobile Number"
+                                                <input id="txtMobile" class="txtCSS" onfocus="CheckValid1(this);" onkeydown="IsnumericMobile(this,event)" onfocusout="CheckValid(this);" style="margin-bottom:5%;" type="text" placeholder="Enter Your Mobile Number"
                                                        data-error="Mobile Number must not be empty." />
                                                 <span id="spantxtMobile" class="spanValidateRemove">*</span>
                                             </div>
